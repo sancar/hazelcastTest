@@ -1,5 +1,10 @@
 package test;
 
+import com.hazelcast.config.Config;
+import com.hazelcast.config.XmlConfigBuilder;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
+
 import java.io.FileNotFoundException;
 
 /**
