@@ -1,7 +1,8 @@
 package test;
 
-import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.core.HazelcastInstance;
+
+import java.io.IOException;
 
 /**
  * User: sancar
@@ -10,8 +11,8 @@ import com.hazelcast.core.HazelcastInstance;
  */
 public class Client {
 
-    public static void main(String[] args) {
-        final HazelcastInstance client = HazelcastClient.newHazelcastClient();
+    public static void main(String[] args) throws IOException {
+        final HazelcastInstance client = Util.createClient();
 
     }
 }
