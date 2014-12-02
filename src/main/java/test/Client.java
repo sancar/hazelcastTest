@@ -36,8 +36,8 @@ public class Client {
                 while (true) {
                     try {
                         Thread.sleep(5000);
-			mapC.put(random.nextInt(), true);
-                    } catch (InterruptedException e) {
+                        mapC.put(random.nextInt(), true);
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
