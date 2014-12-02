@@ -1,6 +1,7 @@
 package test;
 
 import com.hazelcast.client.HazelcastClient;
+import com.hazelcast.client.config.ClientAwsConfig;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.AwsConfig;
 import com.hazelcast.config.Config;
@@ -23,7 +24,6 @@ public class Util {
 
     }
 
-
     private static void awsConfig(Config config) throws IOException {
         final JoinConfig join = config.getNetworkConfig().getJoin();
         join.getMulticastConfig().setEnabled(false);
@@ -36,10 +36,25 @@ public class Util {
                 .setTagValue("sancar").setEnabled(true);
     }
 
+
+    private static void awsClientConfig(ClientConfig clientConfig) throws IOException {
+        ClientAwsConfig clientAwsConfig = new ClientAwsConfig();
+        clientAwsConfig.setInsideAws(false)
+                .setAccessKey(Util.readFile("/home/ec2-user/ec2.identity"))
+                .setSecretKey(Util.readFile("/home/ec2-user/ec2.credential"))
+                .setRegion("us-east-1")
+                .setHostHeader("ec2.amazonaws.com")
+                .setTagKey("Name")
+                .setTagValue("sancar").setEnabled(true);
+        clientConfig.getNetworkConfig().setAwsConfig(clientAwsConfig);
+
+    }
+
     public static HazelcastInstance createServer() throws IOException {
         final Config config = new Config();
         final JoinConfig join = config.getNetworkConfig().getJoin();
         join.getMulticastConfig().setEnabled(false);
+        join.getTcpIpConfig().setEnabled(true).addMember("127.0.0.1");
 
 //        config.setProperty("hazelcast.merge.first.run.delay.seconds", "10");
 //        config.setProperty("hazelcast.merge.next.run.delay.seconds", "10");
@@ -55,21 +70,10 @@ public class Util {
     }
 
     public static HazelcastInstance createClient() throws IOException {
-
         ClientConfig clientConfig = new ClientConfig();
-/*        ClientAwsConfig clientAwsConfig = new ClientAwsConfig();
-        clientAwsConfig.setInsideAws(false)
-                .setAccessKey(Util.readFile("/home/ec2-user/ec2.identity"))
-                .setSecretKey(Util.readFile("/home/ec2-user/ec2.credential"))
-                .setRegion("us-east-1")
-                .setHostHeader("ec2.amazonaws.com")
-                .setTagKey("Name")
-                .setTagValue("sancar").setEnabled(true);
-        clientConfig.getNetworkConfig().setAwsConfig(clientAwsConfig);
-*/
+//        awsClientConfig(clientConfig);
         return HazelcastClient.newHazelcastClient(clientConfig);
     }
-
 
     private static String readFile(String file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
