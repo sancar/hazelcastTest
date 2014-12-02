@@ -56,10 +56,10 @@ public class Util {
         join.getMulticastConfig().setEnabled(false);
         join.getTcpIpConfig().setEnabled(true).addMember("127.0.0.1");
 
-//        config.setProperty("hazelcast.merge.first.run.delay.seconds", "10");
-//        config.setProperty("hazelcast.merge.next.run.delay.seconds", "10");
-//        config.setProperty("hazelcast.heartbeat.interval.seconds", "5");
-//        config.setProperty("hazelcast.max.no.heartbeat.seconds", "20");
+        config.setProperty("hazelcast.merge.first.run.delay.seconds", "10");
+        config.setProperty("hazelcast.merge.next.run.delay.seconds", "10");
+        config.setProperty("hazelcast.heartbeat.interval.seconds", "5");
+        config.setProperty("hazelcast.max.no.heartbeat.seconds", "20");
 //        config.setProperty("hazelcast.operation.call.timeout.millis", "1000");
 //        config.setProperty("hazelcast.client.max.no.heartbeat.seconds", "20");
 //        config.setProperty("hazelcast.client.heartbeat.interval.seconds", "5");
