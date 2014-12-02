@@ -5,6 +5,7 @@ import com.hazelcast.client.config.ClientAwsConfig;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.AwsConfig;
 import com.hazelcast.config.Config;
+import com.hazelcast.config.JoinConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
@@ -28,14 +29,15 @@ public class Util {
         final Config config = new Config();
 //        config.setProperty("hazelcast.merge.first.run.delay.seconds", "10");
 //        config.setProperty("hazelcast.merge.next.run.delay.seconds", "10");
-
 //        config.setProperty("hazelcast.heartbeat.interval.seconds", "5");
 //        config.setProperty("hazelcast.max.no.heartbeat.seconds", "20");
 //        config.setProperty("hazelcast.operation.call.timeout.millis", "1000");
 //        config.setProperty("hazelcast.client.max.no.heartbeat.seconds", "20");
 //        config.setProperty("hazelcast.client.heartbeat.interval.seconds", "5");
 
-        final AwsConfig awsConfig = config.getNetworkConfig().getJoin().getAwsConfig();
+        final JoinConfig join = config.getNetworkConfig().getJoin();
+        join.getMulticastConfig().setEnabled(false);
+        final AwsConfig awsConfig = join.getAwsConfig();
         awsConfig.setAccessKey(Util.readFile("/home/ec2-user/ec2.identity"))
                 .setSecretKey(Util.readFile("/home/ec2-user/ec2.credential"))
                 .setRegion("us-east-1b")
