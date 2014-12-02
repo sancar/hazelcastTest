@@ -34,7 +34,7 @@ public class Util {
 //        config.setProperty("hazelcast.operation.call.timeout.millis", "1000");
 //        config.setProperty("hazelcast.client.max.no.heartbeat.seconds", "20");
 //        config.setProperty("hazelcast.client.heartbeat.interval.seconds", "5");
-
+/*
         final JoinConfig join = config.getNetworkConfig().getJoin();
         join.getMulticastConfig().setEnabled(false);
         final AwsConfig awsConfig = join.getAwsConfig();
@@ -44,12 +44,14 @@ public class Util {
                 .setHostHeader("ec2.amazonaws.com")
                 .setTagKey("Name")
                 .setTagValue("sancar").setEnabled(true);
-        return Hazelcast.newHazelcastInstance(config);
+*/  
+      return Hazelcast.newHazelcastInstance(config);
     }
 
     public static HazelcastInstance createClient() throws IOException {
-        ClientConfig clientConfig = new ClientConfig();
-        ClientAwsConfig clientAwsConfig = new ClientAwsConfig();
+  
+      ClientConfig clientConfig = new ClientConfig();
+/*        ClientAwsConfig clientAwsConfig = new ClientAwsConfig();
         clientAwsConfig.setInsideAws(false)
                 .setAccessKey(Util.readFile("/home/ec2-user/ec2.identity"))
                 .setSecretKey(Util.readFile("/home/ec2-user/ec2.credential"))
@@ -58,7 +60,8 @@ public class Util {
                 .setTagKey("Name")
                 .setTagValue("sancar").setEnabled(true);
         clientConfig.getNetworkConfig().setAwsConfig(clientAwsConfig);
-        return HazelcastClient.newHazelcastClient(clientConfig);
+*/  
+      return HazelcastClient.newHazelcastClient(clientConfig);
     }
 
 
