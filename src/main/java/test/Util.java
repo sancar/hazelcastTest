@@ -40,11 +40,10 @@ public class Util {
         final AwsConfig awsConfig = join.getAwsConfig();
         awsConfig.setAccessKey(Util.readFile("/home/ec2-user/ec2.identity"))
                 .setSecretKey(Util.readFile("/home/ec2-user/ec2.credential"))
-                .setRegion("us-east-1b")
+                .setRegion("us-east-1")
                 .setHostHeader("ec2.amazonaws.com")
                 .setTagKey("Name")
                 .setTagValue("sancar").setEnabled(true);
-        Hazelcast.newHazelcastInstance(config);
         return Hazelcast.newHazelcastInstance(config);
     }
 
@@ -54,7 +53,7 @@ public class Util {
         clientAwsConfig.setInsideAws(false)
                 .setAccessKey(Util.readFile("/home/ec2-user/ec2.identity"))
                 .setSecretKey(Util.readFile("/home/ec2-user/ec2.credential"))
-                .setRegion("us-east-1b")
+                .setRegion("us-east-1")
                 .setHostHeader("ec2.amazonaws.com")
                 .setTagKey("Name")
                 .setTagValue("sancar").setEnabled(true);
