@@ -15,6 +15,11 @@ import java.util.Random;
  */
 public class Client {
 
+    static {
+        System.setProperty("java.util.logging.config.file", "/home/msk/hazelcastTest/logging.propertis");
+    }
+
+
     public static void main(String[] args) throws IOException {
         final HazelcastInstance client = Util.createClient();
         final IMap<Object, Boolean> mapC = client.getMap("default");

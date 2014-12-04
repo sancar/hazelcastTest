@@ -1,7 +1,7 @@
 package test;
 
 import com.hazelcast.client.HazelcastClient;
-import com.hazelcast.client.config.ClientAwsConfig;
+//import com.hazelcast.client.config.ClientAwsConfig;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.AwsConfig;
 import com.hazelcast.config.Config;
@@ -36,7 +36,7 @@ public class Util {
                 .setTagValue("sancar").setEnabled(true);
     }
 
-
+/*
     private static void awsClientConfig(ClientConfig clientConfig) throws IOException {
         ClientAwsConfig clientAwsConfig = new ClientAwsConfig();
         clientAwsConfig.setInsideAws(false)
@@ -49,7 +49,7 @@ public class Util {
         clientConfig.getNetworkConfig().setAwsConfig(clientAwsConfig);
 
     }
-
+*/
     public static HazelcastInstance createServer() throws IOException {
         final Config config = new Config();
         final JoinConfig join = config.getNetworkConfig().getJoin();
@@ -71,6 +71,7 @@ public class Util {
 
     public static HazelcastInstance createClient() throws IOException {
         ClientConfig clientConfig = new ClientConfig();
+	clientConfig.getNetworkConfig().setConnectionAttemptLimit(Integer.MAX_VALUE);
 //        awsClientConfig(clientConfig);
         return HazelcastClient.newHazelcastClient(clientConfig);
     }
