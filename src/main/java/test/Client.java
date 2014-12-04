@@ -16,7 +16,8 @@ import java.util.Random;
 public class Client {
 
     static {
-        System.setProperty("java.util.logging.config.file", "/home/msk/hazelcastTest/logging.propertis");
+//        System.setProperty("java.util.logging.config.file", "/home/msk/hazelcastTest/logging.propertis");
+        System.setProperty("java.util.logging.config.file", "/Users/sancar/workspace/IdeaProjects/hazelcastTest/logging.properties");
     }
 
 

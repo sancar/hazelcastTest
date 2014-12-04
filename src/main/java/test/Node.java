@@ -13,7 +13,8 @@ import com.hazelcast.core.IMap;
 public class Node {
 
     static {
-        System.setProperty("java.util.logging.config.file", "/home/msk/hazelcastTest/logging.properties");
+//        System.setProperty("java.util.logging.config.file", "/home/msk/hazelcastTest/logging.properties");
+        System.setProperty("java.util.logging.config.file", "/Users/sancar/workspace/IdeaProjects/hazelcastTest/logging.properties");
     }
 
     public static void main(String[] args) throws Exception {
