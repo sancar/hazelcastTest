@@ -6,6 +6,7 @@ import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.config.AwsConfig;
 import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;
+import com.hazelcast.config.XmlConfigBuilder;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
@@ -51,7 +52,7 @@ public class Util {
     }
 */
     public static HazelcastInstance createServer() throws IOException {
-        final Config config = new Config();
+        Config config = new XmlConfigBuilder("/home/sancar/workspace/hazelcast.xml").build();
         final JoinConfig join = config.getNetworkConfig().getJoin();
         join.getMulticastConfig().setEnabled(false);
         join.getTcpIpConfig().setEnabled(true).addMember("127.0.0.1");
