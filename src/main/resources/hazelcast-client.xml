@@ -54,9 +54,8 @@
                 <properties>
                     <property name="access-key">KEY</property>
                     <property name="secret-key">KEY</property>
-                    <property name="region">us-east-1a</property>
-                    <property name="tag-key">Name</property>
-                    <property name="tag-value">sancar</property>
+                    <property name="region">us-east-1</property>
+                    <property name="host-header">ec2.amazonaws.com</property>
                 </properties>
             </discovery-strategy>
             <discovery-strategy enabled="false"
