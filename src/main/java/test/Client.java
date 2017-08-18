@@ -1,37 +1,20 @@
 package test;
 
-import com.hazelcast.core.EntryAdapter;
-import com.hazelcast.core.EntryEvent;
+import com.hazelcast.client.HazelcastClient;
+import com.hazelcast.client.config.ClientConfig;
+import com.hazelcast.client.config.XmlClientConfigBuilder;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 
 import java.io.IOException;
 import java.util.Random;
 
-/**
- * User: sancar
- * Date: 02/12/14
- * Time: 00:06
- */
 public class Client {
 
-    static {
-//        System.setProperty("java.util.logging.config.file", "/home/msk/hazelcastTest/logging.propertis");
-        System.setProperty("java.util.logging.config.file", "/Users/sancar/workspace/IdeaProjects/hazelcastTest/logging.properties");
-    }
-
-
     public static void main(String[] args) throws IOException {
-        final HazelcastInstance client = Util.createClient();
-        final IMap<Object, Boolean> mapC = client.getMap("default");
-
-        mapC.addEntryListener(new EntryAdapter<Object, Boolean>() {
-            @Override
-            public void onEntryEvent(EntryEvent<Object, Boolean> event) {
-                System.err.println("mapC event = " + event.getKey());
-            }
-        }, true);
-
+        ClientConfig clientConfig = new XmlClientConfigBuilder().build();
+        HazelcastInstance client = HazelcastClient.newHazelcastClient(clientConfig);
+        final IMap<Object, Boolean> map = client.getMap("default");
 
         final Random random = new Random();
 
@@ -41,8 +24,9 @@ public class Client {
 
                 while (true) {
                     try {
-                        Thread.sleep(5000);
-                        mapC.put(random.nextInt(), true);
+                        Thread.sleep(1000);
+                        System.out.print(".");
+                        map.get(random.nextInt());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -50,7 +34,6 @@ public class Client {
             }
         };
         clientThread.start();
-
 
     }
 }

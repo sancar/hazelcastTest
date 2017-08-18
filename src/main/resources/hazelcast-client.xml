@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2008-2016, Hazelcast, Inc. All Rights Reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<hazelcast-client xsi:schemaLocation="http://www.hazelcast.com/schema/client-config hazelcast-client-config-3.8.xsd"
+                  xmlns="http://www.hazelcast.com/schema/client-config"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <group>
+        <name>dev</name>
+        <password>dev-pass</password>
+    </group>
+    <properties>
+        <property name="hazelcast.logging.type">log4j</property>
+        <property name="hazelcast.discovery.enabled">true</property>
+    </properties>
+    <network>
+        <cluster-members>
+            <address>127.0.0.1</address>
+        </cluster-members>
+
+
+        <connection-timeout>10000</connection-timeout>
+        <connection-attempt-period>500</connection-attempt-period>
+        <connection-attempt-limit>20000</connection-attempt-limit>
+        <smart-routing>true</smart-routing>
+        <redo-operation>true</redo-operation>
+
+
+        <!--<aws enabled="false">-->
+            <!--<access-key>my-access-key</access-key>-->
+            <!--<secret-key>my-secret-key</secret-key>-->
+            <!--<region>us-east-1</region>-->
+            <!--<host-header>ec2.amazonaws.com</host-header>-->
+            <!--<tag-key>Name</tag-key>-->
+            <!--<tag-value>sancar</tag-value>-->
+        <!--</aws>-->
+
+        <discovery-strategies>
+            <discovery-strategy enabled="true" class="com.hazelcast.aws.AwsDiscoveryStrategy">
+                <properties>
+                    <property name="access-key">KEY</property>
+                    <property name="secret-key">KEY</property>
+                    <property name="region">us-east-1</property>
+                    <property name="tag-key">Name</property>
+                    <property name="tag-value">sancar</property>
+                </properties>
+            </discovery-strategy>
+            <discovery-strategy enabled="false"
+                                class="com.hazelcast.spi.discovery.multicast.MulticastDiscoveryStrategy">
+                <properties>
+                    <property name="port">54427</property>
+                    <property name="group">224.2.5.20</property>
+                </properties>
+            </discovery-strategy>
+        </discovery-strategies>
+    </network>
+
+
+</hazelcast-client>
