@@ -1,0 +1,48 @@
+package caching.entities;
+
+import caching.AimsPortableFactory;
+import com.hazelcast.nio.serialization.PortableReader;
+import com.hazelcast.nio.serialization.PortableWriter;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+
+public class CachedCurrency extends CacheBase {
+    private static final String FIELD_CURRENCY = "currency";
+    private static final String FIELD_AMOUNT = "amount";
+    private BigDecimal amount = BigDecimal.ZERO;
+    private String currency = "";
+
+    public CachedCurrency() {
+        //Required by Hazelcast
+    }
+
+    public CachedCurrency(BigDecimal amount, String currency) {
+        this.amount = amount;
+        this.currency = currency;
+    }
+
+    @Override
+    public int getFactoryId() {
+        return AimsPortableFactory.PORTABLE_FACTORY_ID;
+    }
+
+    @Override
+    public int getClassId() {
+        return AimsPortableFactory.CACHED_CURRENCY_CLASS_ID;
+    }
+
+    @Override
+    public void writePortable(PortableWriter portableWriter) throws IOException {
+        portableWriter.writeUTF(FIELD_CURRENCY, currency);
+        portableWriter.writeUTF(FIELD_AMOUNT, amount.toString());
+    }
+
+    @Override
+    public void readPortable(PortableReader portableReader) throws IOException {
+        currency = portableReader.readUTF(FIELD_CURRENCY);
+        amount = new BigDecimal(portableReader.readUTF(FIELD_AMOUNT));
+    }
+
+
+}
