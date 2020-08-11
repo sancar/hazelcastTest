@@ -43,13 +43,16 @@
                 <multicast-port>54427</multicast-port>
             </multicast>
             <tcp-ip enabled="true">
-                <member>3.87.129.218</member>
-                <member>34.235.151.220</member>
-            </tcp-ip>
-
-
+            <!--
+                <member>10.211.59.207</member>
+                <member>10.97.198.149</member>
+            -->
+		<member>3.87.129.218</member>
+		<member>34.235.151.220</member>
+	     </tcp-ip>
         </join>
-        <interfaces enabled="true">
+	     <public-address>34.235.151.220</public-address>
+	<interfaces enabled="false">
             <interface>3.87.129.218</interface>
             <interface>34.235.151.220</interface>
         </interfaces>
