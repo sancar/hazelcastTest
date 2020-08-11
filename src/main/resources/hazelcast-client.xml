@@ -15,58 +15,16 @@
   ~ limitations under the License.
   -->
 
-<hazelcast-client xsi:schemaLocation="http://www.hazelcast.com/schema/client-config hazelcast-client-config-3.8.xsd"
-                  xmlns="http://www.hazelcast.com/schema/client-config"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<hazelcast-client xmlns="http://www.hazelcast.com/schema/client-config"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://www.hazelcast.com/schema/client-config
+                  http://www.hazelcast.com/schema/client-config/hazelcast-client-config-4.1.xsd">
 
-    <group>
-        <name>dev</name>
-        <password>dev-pass</password>
-    </group>
-    <properties>
-        <property name="hazelcast.logging.type">log4j</property>
-        <property name="hazelcast.discovery.enabled">true</property>
-    </properties>
     <network>
         <cluster-members>
-            <address>127.0.0.1</address>
+            <address>3.87.129.218</address>
+            <address>34.235.151.220</address>
         </cluster-members>
-
-
         <connection-timeout>10000</connection-timeout>
-        <connection-attempt-period>500</connection-attempt-period>
-        <connection-attempt-limit>20000</connection-attempt-limit>
-        <smart-routing>true</smart-routing>
-        <redo-operation>true</redo-operation>
-
-
-        <!--<aws enabled="false">-->
-            <!--<access-key>my-access-key</access-key>-->
-            <!--<secret-key>my-secret-key</secret-key>-->
-            <!--<region>us-east-1</region>-->
-            <!--<host-header>ec2.amazonaws.com</host-header>-->
-            <!--<tag-key>Name</tag-key>-->
-            <!--<tag-value>sancar</tag-value>-->
-        <!--</aws>-->
-
-        <discovery-strategies>
-            <discovery-strategy enabled="true" class="com.hazelcast.aws.AwsDiscoveryStrategy">
-                <properties>
-                    <property name="access-key">KEY</property>
-                    <property name="secret-key">KEY</property>
-                    <property name="region">us-east-1</property>
-                    <property name="host-header">ec2.amazonaws.com</property>
-                </properties>
-            </discovery-strategy>
-            <discovery-strategy enabled="false"
-                                class="com.hazelcast.spi.discovery.multicast.MulticastDiscoveryStrategy">
-                <properties>
-                    <property name="port">54427</property>
-                    <property name="group">224.2.5.20</property>
-                </properties>
-            </discovery-strategy>
-        </discovery-strategies>
     </network>
-
-
 </hazelcast-client>
