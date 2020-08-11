@@ -49,8 +49,9 @@
 
 
         </join>
-        <interfaces enabled="false">
-            <interface>10.10.1.*</interface>
+        <interfaces enabled="true">
+            <interface>3.87.129.218</interface>
+            <interface>34.235.151.220</interface>
         </interfaces>
 
 
